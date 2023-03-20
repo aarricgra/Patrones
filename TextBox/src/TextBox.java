@@ -17,9 +17,31 @@ class TextBox {
         int ancho, alto;
 
         public Builder(String texto,int  alto, int ancho) {
-            this.texto=texto;
-            this.alto = alto;
-            this.ancho=ancho;
+            if(texto!=null){
+                this.texto=texto;
+            }else{
+                this.texto="";
+            }
+
+            if(this.texto.length()==0){
+                this.alto=0;
+            }else{
+                if(alto>0){
+                    this.alto = alto;
+                }else{
+                    this.alto=1;
+                }
+            }
+
+
+
+
+            if(ancho<this.texto.length()){
+                this.ancho=texto.length();
+            }else{
+                this.ancho=ancho;
+            }
+
         }
 
         TextBox build(){
