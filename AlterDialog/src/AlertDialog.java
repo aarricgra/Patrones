@@ -37,11 +37,11 @@ public class AlertDialog {
         }
 
         Builder setNo(){
-            this.yesButtonText = "Cancel";
+            this.noButtonText = "Cancel";
             return this;
         }
         Builder setNo(String a){
-            this.yesButtonText = a;
+            this.noButtonText = a;
             return this;
         }
 
