@@ -1,28 +1,56 @@
 class Calculadora {
-
-    static int suma(int... numeros) {
+    interface Callback{
+        void resultado(int retorno);
+        void error(String error);
+    }
+    void suma(Callback callback, int... numeros) {
         int resultado = 0;
-        for (Integer numero : numeros) resultado += numero;     // ¿ y si resultado + numero > Integer.MAX_VALUE ?
-        return resultado;
+        for (Integer numero : numeros){
+                resultado += numero;
+        }
+        if (resultado <Integer.MAX_VALUE){
+            callback.error("Valor de la suma superior al maximo");
+        }else{
+            callback.resultado(resultado);        }
+
     }
 
-    static int divide(int a, int b) {
-        return a/b;     // ¿ y si b es 0 ?
+    void divide(Callback callback,int a, int b) {
+        if(b==0){
+            callback.resultado(a/b);
+        }else{
+            callback.error("Division entre 0 no valida");
+        }
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        int resultadoSuma = Calculadora.suma(1, 2, 3, 10, 20);
-        System.out.println("La suma es: " + resultadoSuma);
+        Calculadora a=new Calculadora();
+        a.suma(new Calculadora.Callback(){
 
-        int resultadoDivision = Calculadora.divide(13, 2);
-        System.out.println("La division es: " + resultadoDivision);
+            @Override
+            public void resultado(int retorno) {
+                System.out.println(retorno);
+            }
 
-        int resultadoOtraSuma = Calculadora.suma(1, 2147483646, 1);
-        System.out.println("La suma es: " + resultadoOtraSuma);
+            @Override
+            public void error(String error) {
+                System.out.println(error);
+            }
+        },1, 2, 3, 10, 2147483647);
 
-        int resultadoOtraDivision = Calculadora.divide(13, 0);
-        System.out.println("La division es: " + resultadoOtraDivision);
+        a.divide(new Calculadora.Callback(){
+
+            @Override
+            public void resultado(int retorno) {
+                System.out.println(retorno);
+            }
+
+            @Override
+            public void error(String error) {
+                System.out.println(error);
+            }
+        },13, 2);
     }
 }
