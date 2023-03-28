@@ -32,7 +32,7 @@ public class Main {
         for (int i = 1; i <= 10; i++) {
             final int docid = i;
             printOrders.add(() -> {
-               printerSpooler.printJob("Document" + docid);
+                printerSpooler.printJob("Document" + docid);
                 return null;
             });
         }
