@@ -72,6 +72,7 @@ public class Main {
         book.display();
 
         Product electronic = ProductFactory.createElectronic("iPhone 12 Pro", 999.99, "Apple");
+
         electronic.display();
 
         Product clothing = ProductFactory.createClothing("Maxi Dress", 38, "ASOS");
