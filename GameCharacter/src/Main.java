@@ -14,6 +14,20 @@ abstract class Character {
     public abstract void die();
 }
 
+class CharacterFactory {
+    public Character createCharacter(String type, String name, int health, int speed) {
+        if (type.equalsIgnoreCase("knight")) {
+            return new Knight(name, health, speed);
+        } else if (type.equalsIgnoreCase("wizard")) {
+            return new Wizard(name, health, speed);
+        } else {
+            System.out.println("Invalid character type: " + type);
+            return null;
+        }
+    }
+}
+
+
 class Knight extends Character {
 
     public Knight(String name, int health, int speed) {
